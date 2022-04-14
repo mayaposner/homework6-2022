@@ -30,7 +30,6 @@ document.querySelector("#faster").addEventListener("click", function() {
 	console.log('The new speed is ' + video.playbackRate)
 });
 
-// MUTED: MUST FINISH FROM LECTURE OVERVIEW
 document.querySelector("#mute").addEventListener("click", function() {
 	console.log("The value of mute is " + video.muted); 
 	// have to check if currenly muted --> 
@@ -38,16 +37,41 @@ document.querySelector("#mute").addEventListener("click", function() {
 	// else set muted to true & update text
 
 	if (mute == true){ 
-
+		video.muted = false; 
+		document.querySelector('#volume').innerHTML = video.volume*100 + '%'
+		document.querySelector('#mute').innerHTML = 'Mute'
 	}
-	video.muted = true
+
+	else { 
+		video.muted = true; 
+		document.querySelector('#volume').innerHTML = '0%'
+		document.querySelector('#mute').innerHTML = 'Unmute'
+	}
 });
 
-// SLIDER: MUST FINISH FROM LECTURE OVERVIEW
 document.querySelector("#slider").addEventListener("click", function() {
 	console.log(this.value); 
-	// Use this.value to update vid vol & volume element below
+	video.volume = this.value/100; 
+	document.querySelector('volume').innerHTML = this.value + '%';
 	
+});
+
+document.querySelector("#skip").addEventListener("click", function() {
+	console.log(video.currentTime); 
+	video.currentTime += 15;
+	console.log(video.currentTime)
+	if (video.currentTime == video.duration) { 
+		video.load();
+	}
+	
+});
+
+document.getElementById("vintage").addEventListener("click", function() {
+	video.classList.add('oldSchool')
+});
+
+document.getElementById("orig").addEventListener("click", function() {
+	video.classList.remove('oldSchool')
 });
 
 
